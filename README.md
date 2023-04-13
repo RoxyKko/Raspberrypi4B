@@ -4,5 +4,7 @@
 
 2、i2c_sht20       树莓派i2c用户空间驱动练习
 
-3、iot_temp_humi   树莓派温度上报练习
+3、sqlite          树莓派使用sqlite练习
+
+4、iot_temp_humi   树莓派温度上报练习
 

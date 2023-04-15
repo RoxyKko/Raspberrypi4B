@@ -8,6 +8,8 @@
 
 4、iot_temp_humi    树莓派温度上报练习
 
-5、spi_oled         树莓派spi用户空间驱动练习
+5、spi_loop         树莓派spi回环测试
 
-6、mqtt_iot         树莓派mqtt
+6、spi_oled         树莓派spi用户空间驱动练习
+
+7、mqtt_iot         树莓派mqtt

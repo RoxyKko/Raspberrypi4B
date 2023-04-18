@@ -44,9 +44,7 @@ int main(int argc, char **argv)
     struct option long_options[] = {
         {"help", no_argument, NULL, 'h'},
         {"version", no_argument, NULL, 'v'},
-        {"temp", no_argument, NULL, 't'},
-        {"humi", no_argument, NULL, 'H'},
-        {"serial", no_argument, NULL, 's'},
+        {"time", optional_argument, NULL, 't'},
         {"deamon", no_argument, NULL, 'b'},
         {"ipaddr", required_argument, NULL, 'i'},
         {"port", required_argument, NULL, 'p'},
@@ -72,7 +70,7 @@ int main(int argc, char **argv)
     log_info("============================================================\n");
 
     // 命令行选项解析
-    while ((opt = getopt_long(argc, argv, "hvtHsbp:i:", long_options, NULL)) != -1)
+    while ((opt = getopt_long(argc, argv, "hvt:bp:i:", long_options, NULL)) != -1)
     {
         switch (opt)
         {
@@ -85,13 +83,8 @@ int main(int argc, char **argv)
             print_vision(progname);
             return EXIT_SUCCESS;
         case 't':
-            // 显示温度
-            break;
-        case 'H':
-            // 显示湿度
-            break;
-        case 's':
-            // 显示序列号
+            // 设置时间间隔
+            interval = atoi(optarg);
             break;
         case 'b':
             // 后台运行
@@ -195,6 +188,7 @@ int main(int argc, char **argv)
             if (get_sock_status(socket_fd) == 0)
             {
                 socket_connected = false;
+                close(socket_fd);
             }
 
             if (socket_connected)
@@ -240,6 +234,7 @@ int main(int argc, char **argv)
                 if (get_sock_status(socket_fd) == 0)
                 {
                     socket_connected = false;
+                    close(socket_fd);
                 }
 
                 // 若socket未连接，则连接socket
